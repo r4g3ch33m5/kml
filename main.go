@@ -17,28 +17,6 @@ var (
 	_ = kml.Namespace
 )
 
-func findFieldNames(kmlFile string) {
-	// fieldNames := make(map[string]struct{})
-
-	// Load the KML file
-	doc := etree.NewDocument()
-	err := doc.ReadFromFile(kmlFile)
-	if err != nil {
-		fmt.Println(err)
-	}
-	mapFieldTags := make(map[string]struct{})
-	childs := doc.ChildElements()
-
-	for n := 0; n < len(childs); n += 1 {
-		childs = append(childs, childs[n].ChildElements()...)
-		mapFieldTags[childs[n].FullTag()] = struct{}{}
-	}
-
-	for i := range mapFieldTags {
-		fmt.Println(i)
-	}
-}
-
 func main() {
 	file, err := os.Open(filepath.Join(".", "eligible_area_yes.kml"))
 	if err != nil {
